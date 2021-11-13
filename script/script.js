@@ -13,3 +13,15 @@ function voltaBotao(){
     document.getElementById("formularioLista").innerHTML =('')
 
 }
+
+function mostrar(tituloV){
+
+    var lista = document.getElementById("lista");
+    var novoItem = document.createElement('li');
+    novoItem.innerHTML = tituloV;
+    lista.appendChild(novoItem);
+    
+
+
+
+}
