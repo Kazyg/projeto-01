@@ -1,16 +1,26 @@
 function salvar(){
 
+   
+
 const titulo = document.getElementById('titulo');
 const descricao = document.getElementById('descricao');
 const data = document.getElementById('data');
 
-voltaBotao()
+
 
 const tituloV = titulo.value.trim();
+
+var x = verificarKey(tituloV) 
+if(x == false){
+    return;
+}
+
 const descricaoV = descricao.value.trim();
 const dataV = data.value.trim();
+voltaBotao()
 
-    let tarefa = {"titulo":tituloV, "descricao":descricaoV, "data":dataV};
+    var tarefa = {"titulo":tituloV, "descricao":descricaoV, "data":dataV};
 
 mostrar(tituloV)
+armazenando(tarefa, tituloV);
 }
