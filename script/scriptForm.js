@@ -12,15 +12,16 @@ const tituloV = titulo.value.trim();
 
 var x = verificarKey(tituloV) 
 if(x == false){
-    return;
+  return;
 }
 
 const descricaoV = descricao.value.trim();
 const dataV = data.value.trim();
 voltaBotao()
 
-    var tarefa = {"titulo":tituloV, "descricao":descricaoV, "data":dataV};
+    var tarefa = {"titulo":tituloV, "descricao":descricaoV, "data":dataV, "checado": 0};
 
+armazenando(tarefa);
 mostrar(tituloV)
-armazenando(tarefa, tituloV);
+
 }
