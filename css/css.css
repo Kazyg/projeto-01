@@ -1,3 +1,97 @@
+#divs{
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: silver;
+    opacity: 87%;
+
+}
+body{
+
+        background-color: #121212;
+        color:#FFFFFF;
+
+}
+main{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+    
+    border: 0;
+    padding: 0;
+    margin: 0;
+    
+}
+
+
+h1{
+
+    font-size: 100px;
+    margin: 0;
+    opacity: 87%;
+
+}
+h2{
+
+    opacity: 60%;
+}
+
+#adicionar{
+
+   
+    font-size: 25px;
+    position: relative;
+    top: 40px;
+    border-width: 1px;
+    border-color: silver;
+    padding-top: 5px;
+    padding-left: 11px;
+    padding-right: 11px;
+    padding-bottom: 5px;
+    background-color: silver;
+    
+}
+
+#submitVoltar{
+
+   
+    font-size: 20px;
+    height: 25px;
+    position: relative;
+    top: 20px;
+    border-width: 1px;
+    border-color: silver;
+    padding-top: 0px;
+    padding-left: 11px;
+    padding-right: 11px;
+    padding-bottom: 0px;
+    background-color: silver;
+    
+}
+
+:hover#adicionar{
+
+    background-color:dimgray;
+
+}
+
+#formList{
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    top: 50px;
+    height: 300px;
+    color:gray;
+    font-size: 25px;
+    align-items: center;
+    
+
+}
 #formList small {
     color: #e74c3c;
     visibility: hidden;
@@ -5,5 +99,100 @@
 #formListErro small{
 
     color: #e74c3c;
+    font-size: 15px;
 
 }
+#formListErro{
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    top: 50px;
+    height: 300px;
+    color:gray;
+    font-size: 25px;
+    align-items: center;
+    
+
+}
+
+
+input#titulo,#descricao,#data{
+
+    
+    display: flex;
+    justify-content: space-evenly;
+    
+    width: 300px;
+    
+    background-color: #121212;
+    border-width: 2px;
+    border-color: #FFFFFF;
+    opacity: 60%;
+    color: #FFFFFF;
+    font-size: 20px;
+   
+
+}
+#descricao{
+    height: 150px;
+    
+}
+li{
+    list-style-type: none;
+}
+#listaTarefas{
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    top: 70px;
+
+
+}
+#listaTarefas input[type="button"]{
+
+    
+
+    width: 50px;
+
+}
+#lista ul{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: 25px;
+
+}
+#lista{
+
+    display: flex;
+    
+    flex-direction: column;
+    position: relative;
+    padding-left: 0px;
+    
+    top: 20px;
+    
+    width: 300px;
+    
+    background-color: #121212;
+    border-width: 2px;
+    border-color: #FFFFFF;
+    opacity: 87%;
+    color: #FFFFFF;
+    font-size: 20px;
+  
+}
+
+
+
+
+
+
+
+

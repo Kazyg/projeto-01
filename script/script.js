@@ -6,13 +6,13 @@ mostrarInicio()
 function botaoAdd(){
 
     document.getElementById("botao").innerHTML =('<button id="adicionar" value="Adicionar Tarefa" onclick="salvar()">Adicionar Tarefa</button>')
-    document.getElementById("formularioLista").innerHTML =('<form id="formList"><br> Titulo: <input type="text" id="titulo"><br><small>error mssg</small><br> descrição: <input type="text" id="descricao"><br><br> Data para finalizar: <input type="date" id="data"></form>')
+    document.getElementById("formularioLista").innerHTML =('<form id="formList"> Titulo: <input type="text" id="titulo"><small>error mssg</small> descrição: <input type="text" id="descricao"><br> Data para finalizar: <input type="date" id="data"><input id="submitVoltar" type="submit" value="fechar" onclick= "voltaBotao()"</form>')
     
 }
 
 
 function voltaBotao(){
-    document.getElementById("botao").innerHTML =('<button id="adicionar" value="Adicionar Tarefa" onclick="botaoAdd()">Adicionar Tarefa</button>')
+    document.getElementById("botao").innerHTML =('<button id="adicionar" value="Adicionar Tarefa" onclick="botaoAdd()">Nova Tarefa +</button>')
     document.getElementById("formularioLista").innerHTML =('')
 
 }
@@ -25,6 +25,11 @@ function mostrarInicio(){
 
     let itens = arrayTarefas[i];
     let lista = document.getElementById("lista");
+
+    let ulMenor = document.createElement('ul');
+    ulMenor.setAttribute("id", "ul_"+i);
+
+    let quebra = document.createElement('br');
 
     let novoItem = document.createElement('li');
     novoItem.setAttribute("id", "li_" + i);
@@ -46,10 +51,17 @@ function mostrarInicio(){
 
 
     novoItem.innerHTML = itens.titulo;
+    lista.appendChild(ulMenor);
+
+    let listaMenor = document.getElementById("ul_"+i);
     
-    lista.appendChild(novoItem);
-    lista.appendChild(checkbox);
-    lista.appendChild(botao);
+    listaMenor.appendChild(checkbox);
+    
+    listaMenor.appendChild(novoItem);
+    listaMenor.appendChild(botao);
+    listaMenor.appendChild(quebra);
+    
+    
     
     
     if(itens.checado == 1){
@@ -68,6 +80,13 @@ function mostrar(tituloV){
 
     let i = arrayTarefas.length - 1;
     let lista = document.getElementById("lista");
+
+   
+    let ulMenor = document.createElement('ul');
+    ulMenor.setAttribute("id", "ul_"+i);
+
+    let quebra = document.createElement('br');
+
     let novoItem = document.createElement('li');
     novoItem.setAttribute("id", "li_" + i);
     novoItem.setAttribute("onclick", "abrirTarefa(id)");
@@ -84,9 +103,18 @@ function mostrar(tituloV){
     botao.setAttribute("value", "X");
 
     novoItem.innerHTML = tituloV;
-    lista.appendChild(novoItem);
-    lista.appendChild(checkbox);
-    lista.appendChild(botao);
+
+    lista.appendChild(ulMenor);
+
+    let listaMenor = document.getElementById('ul_'+i);
+    
+    listaMenor.appendChild(checkbox);
+  
+    listaMenor.appendChild(novoItem);
+    listaMenor.appendChild(botao);
+    listaMenor.appendChild(quebra);
+    
+    
     
 
 }
@@ -101,27 +129,34 @@ function abrirTarefa(idClicado){
     const tituloClicado = tarefaClicada.titulo;
     const descricaoClicado = tarefaClicada.descricao;
     const dataClicado = tarefaClicada.data;
+    let quebra = document.createElement('br');
+    let quebra1 = document.createElement('br');
 
-    document.getElementById("paginaToda").innerHTML =('<div><ul id="lista"></ul><br><button id="voltar" value="voltar" onclick="voltarParaLista()">Voltar</button></div>');
+    document.getElementById("paginaToda").innerHTML =('<div class="divs"><h1>MyList</h1><h2>sua lista de tarefas</h2></div><div id = "divs"><ul id="lista"></ul><br><button id="voltar" value="voltar" onclick="voltarParaLista()">Voltar</button></div>');
     let lista = document.getElementById("lista");
 
     let novoItem = document.createElement('li');
-    novoItem.innerHTML = tituloClicado;
+    novoItem.innerHTML = "Titulo:<br>"+tituloClicado;
     lista.appendChild(novoItem);
+    lista.appendChild(quebra1);
 
-    let novoItem1 = document.createElement('li');
-    novoItem1.innerHTML = descricaoClicado;
-    lista.appendChild(novoItem1);
-
-    let novoItem2 = document.createElement('li');
-    novoItem2.innerHTML = dataClicado;
-    lista.appendChild(novoItem2);
+    if(descricaoClicado !== ""){
+        let novoItem1 = document.createElement('li');
+        novoItem1.innerHTML = "Descrição:<br>"+descricaoClicado;
+        lista.appendChild(novoItem1);
+        lista.appendChild(quebra);
+    }
+    if(dataClicado !== ""){
+        let novoItem2 = document.createElement('li');
+        novoItem2.innerHTML = "Data para Entrega:<br>"+dataClicado;
+        lista.appendChild(novoItem2);
+    }
 
 }
 
 function voltarParaLista(){
 
-    document.getElementById("paginaToda").innerHTML = ('<div id="botao"><button id="adicionar" value="Adicionar Tarefa" onclick="botaoAdd()">Nova Tarefa +</button></div><div id="formularioLista"></div><div id="listaTarefas"><ul id="lista"></ul></div>');
+    document.getElementById("paginaToda").innerHTML = ('<div class="divs"><h1>MyList</h1><h2>sua lista de tarefas</h2></div><div id="botao"><button id="adicionar" value="Adicionar Tarefa" onclick="botaoAdd()">Nova Tarefa +</button></div><div id="formularioLista"></div><div id="listaTarefas"><ul id="lista"></ul></div>');
     mostrarInicio();
 
 }
@@ -176,10 +211,28 @@ function editando(tarefa, x){
 function excluir(idExcluido){
 
     const idExcluidoMM = idExcluido.split("_").pop();
-    arrayTarefas.splice(idExcluidoMM, 1);
-    localStorage.setItem("tarefas", JSON.stringify(arrayTarefas));
-    document.getElementById("lista").innerHTML = ('');
-    mostrarInicio()
+    const tarefaClicada = arrayTarefas[idExcluidoMM];
+    const tituloClicado = tarefaClicada.titulo;
+    let checado = document.getElementById("ck_"+idExcluidoMM);
+
+    if(checado.checked){
+
+        var confirmado = window.confirm("Deseja excluir a tarefa " + tituloClicado + "?");
+
+    }else{
+
+        var confirmado = window.confirm("                             A tarefa ainda não foi concluida\n                           Deseja excluir a tarefa " + tituloClicado + "?");
+
+    }
+    if(confirmado == true){
+        arrayTarefas.splice(idExcluidoMM, 1);
+        localStorage.setItem("tarefas", JSON.stringify(arrayTarefas));
+        document.getElementById("lista").innerHTML = ('');
+        mostrarInicio()
+    }else{
+
+        return;
+    }
 
 
 
